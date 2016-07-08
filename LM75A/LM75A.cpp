@@ -58,7 +58,13 @@ float LM75A::degreesToFahrenheit(float temperature_in_degrees)
 
 float LM75A::getTemperatureInFahrenheit() const
 {
-  return degreesToFahrenheit(getTemperatureInDegrees());
+  float temperature_in_degrees = getTemperatureInDegrees();
+
+  if (temperature_in_degrees == INVALID_LM75A_TEMPERATURE) {
+    return INVALID_LM75A_TEMPERATURE;
+  }
+
+  return degreesToFahrenheit(temperature_in_degrees);
 }
 
 float LM75A::getTemperatureInDegrees() const
