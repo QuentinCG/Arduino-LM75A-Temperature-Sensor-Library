@@ -10,9 +10,11 @@
 
 #include <LM75A.h>
 
-LM75A lm75a_sensor/*(false, //A0 LM75A pin state
-                   false, //A1 LM75A pin state
-                   false, //A2 LM75A pin state)*/; // Create I2C LM75A instance
+// Create I2C LM75A instance
+LM75A lm75a_sensor(false,  //A0 LM75A pin state
+                   false,  //A1 LM75A pin state
+                   false); //A2 LM75A pin state
+// Equivalent to "LM75A lm75a_sensor;"
 
 void setup(void)
 {
