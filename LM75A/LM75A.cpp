@@ -89,7 +89,7 @@ float LM75A::getTemperatureInDegrees() const
   }
 
   // Modify the value (only 11 MSB are relevant if swapped)
-  uint16_t refactored_value;
+  int16_t refactored_value;
   uint8_t* ptr = (uint8_t*)&refactored_value;
 
   // Swap bytes
