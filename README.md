@@ -9,7 +9,7 @@ This library (with example) is designed to be integrated in projects using LM75A
 
 ## How to install
 
-1) Download <a target="_blank" href="https://github.com/QuentinCG/Arduino-LM75A-Temperature-Sensor-Library/releases/download/1.0.0/LM75A_v1_0_0.zip">latest release</a>
+1) Download <a target="_blank" href="https://github.com/QuentinCG/Arduino-LM75A-Temperature-Sensor-Library/releases/download/1.1.0/LM75A_v1_1_0.zip">latest release</a>
 
 2) On your Arduino IDE, click "Sketch" menu and then "Include Library > Add .ZIP Libraries"
 
