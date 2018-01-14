@@ -50,3 +50,7 @@ This project is under MIT license. This means you can use it as you want (just d
 ## Contribute
 
 If you want to add more examples or improve the library, just create a pull request with proper commit message and right wrapping.
+
+## Contributors
+
+Thank you <a target="_blank" href="https://github.com/andrzejboro">andrzejboro</a> for your help on a bug for negative temperature
