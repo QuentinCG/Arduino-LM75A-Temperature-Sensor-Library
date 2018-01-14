@@ -2,7 +2,7 @@
  * \brief I2C LM75A temperature sensor library (implementation)
  *
  * \author Quentin Comte-Gaz <quentin@comte-gaz.com>
- * \date 8 July 2016
+ * \date 8 July 2016 & 14 January 2018
  * \license MIT License (contact me if too restrictive)
  * \copyright Copyright (c) 2016 Quentin Comte-Gaz
  * \version 1.1
