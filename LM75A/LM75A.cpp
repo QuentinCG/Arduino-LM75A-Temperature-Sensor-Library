@@ -89,7 +89,7 @@ float LM75A::getTemperatureInDegrees() const
   }
 
   // Modify the value (only 11 MSB are relevant if swapped)
-  uint16_t refactored_value;
+  int16_t refactored_value;
   uint8_t* ptr = (uint8_t*)&refactored_value;
 
   // Swap bytes
@@ -98,15 +98,16 @@ float LM75A::getTemperatureInDegrees() const
 
   // Shift data (left-aligned)
   refactored_value >>= 5;
-
-  // Relocate negative bit (11th bit to 16th bit)
+  
+  float real_value;
   if (refactored_value & 0x0400) {
-    refactored_value &= 0x03FF;
-    refactored_value |= 0x8000;
+  // When sign bit is set, set upper unused bits, then 2's complement
+    refactored_value |= 0xf800;
+    refactored_value = ~refactored_value + 1;
+    real_value = (float)refactored_value * (-1) * LM75A_DEGREES_RESOLUTION;
   }
+  else
+    real_value = (float)refactored_value *  LM75A_DEGREES_RESOLUTION;
 
-  // Real value can be calculated with sensor resolution
-  real_result = (float)refactored_value * LM75A_DEGREES_RESOLUTION;
-
-  return (float)refactored_value * LM75A_DEGREES_RESOLUTION;
+  return real_value;
 }
