@@ -5,7 +5,7 @@
  * \date 8 July 2016
  * \license MIT License (contact me if too restrictive)
  * \copyright Copyright (c) 2016 Quentin Comte-Gaz
- * \version 1.0
+ * \version 1.1
  */
 
 #include "LM75A.h"
@@ -98,16 +98,17 @@ float LM75A::getTemperatureInDegrees() const
 
   // Shift data (left-aligned)
   refactored_value >>= 5;
-  
+
   float real_value;
   if (refactored_value & 0x0400) {
-  // When sign bit is set, set upper unused bits, then 2's complement
+    // When sign bit is set, set upper unused bits, then 2's complement
     refactored_value |= 0xf800;
     refactored_value = ~refactored_value + 1;
     real_value = (float)refactored_value * (-1) * LM75A_DEGREES_RESOLUTION;
   }
-  else
+  else {
     real_value = (float)refactored_value *  LM75A_DEGREES_RESOLUTION;
+  }
 
   return real_value;
 }
