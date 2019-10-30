@@ -36,7 +36,7 @@ One example is provided with this library:
 
 ### Show temperature in degrees and fahrenheit every second
 
-<a target="_blank" href="https://github.com/QuentinCG/Arduino-LM75A-Temperature-Sensor-Library/blob/master/LM75A/examples/LM75A_ShowTemperature/LM75A_ShowTemperature.ino">Link to source code</a>
+<a target="_blank" href="https://github.com/QuentinCG/Arduino-LM75A-Temperature-Sensor-Library/blob/master/examples/LM75A_ShowTemperature/LM75A_ShowTemperature.ino">Link to source code</a>
 
 ## License
 
