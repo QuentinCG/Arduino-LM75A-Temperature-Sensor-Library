@@ -3,7 +3,7 @@ sudo: false
 
 env:
   global:
-  - PRETTYNAME="Hygrometer Sensor (Rain Drop and Soil Moisture)"
+  - PRETTYNAME="LM75A Temperature Sensor"
 
 before_install:
 - source <(curl -SLs https://raw.githubusercontent.com/adafruit/travis-ci-arduino/master/install.sh)
