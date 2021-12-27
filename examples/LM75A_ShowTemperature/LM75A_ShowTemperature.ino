@@ -2,9 +2,9 @@
  * \brief Show temperature in degrees and fahrenheit every second
  *
  * \author Quentin Comte-Gaz <quentin@comte-gaz.com>
- * \date 8 July 2016
+ * \date 27 December 2021
  * \license MIT License (contact me if too restrictive)
- * \copyright Copyright (c) 2016 Quentin Comte-Gaz
+ * \copyright Copyright (c) 2021 Quentin Comte-Gaz
  * \version 1.0
  */
 
@@ -26,9 +26,12 @@ void loop()
 {
   float temperature_in_degrees = lm75a_sensor.getTemperatureInDegrees();
 
-  if (temperature_in_degrees == INVALID_LM75A_TEMPERATURE) {
+  if (temperature_in_degrees == INVALID_LM75A_TEMPERATURE)
+  {
     Serial.println("Error while getting temperature");
-  } else {
+  }
+  else
+  {
     Serial.print("Temperature: ");
     Serial.print(temperature_in_degrees);
     Serial.print(" degrees (");
