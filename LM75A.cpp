@@ -31,15 +31,19 @@ LM75A::LM75A(bool A0_value, bool A1_value, bool A2_value)
 {
   _i2c_device_address = LM75A_BASE_ADDRESS;
 
-  if (A0_value) {
+  // Update I2C address depending on how the sensor is connected
+  if (A0_value)
+  {
     _i2c_device_address += 1;
   }
 
-  if (A1_value) {
+  if (A1_value)
+  {
     _i2c_device_address += 2;
   }
 
-  if (A2_value) {
+  if (A2_value)
+  {
     _i2c_device_address += 4;
   }
 
@@ -60,7 +64,8 @@ float LM75A::getTemperatureInFahrenheit() const
 {
   float temperature_in_degrees = getTemperatureInDegrees();
 
-  if (temperature_in_degrees == INVALID_LM75A_TEMPERATURE) {
+  if (temperature_in_degrees == INVALID_LM75A_TEMPERATURE)
+  {
     return INVALID_LM75A_TEMPERATURE;
   }
 
@@ -75,15 +80,19 @@ float LM75A::getTemperatureInDegrees() const
   // Go to temperature data register
   Wire.beginTransmission(_i2c_device_address);
   Wire.write(LM75A_REG_ADDR_TEMP);
-  if(Wire.endTransmission()) {
+  if (Wire.endTransmission())
+  {
     // Transmission error
     return real_result;
   }
 
   // Get content
-  if (Wire.requestFrom(_i2c_device_address, 2)) {
+  if (Wire.requestFrom(_i2c_device_address, 2))
+  {
     Wire.readBytes((uint8_t*)&i2c_received, 2);
-  } else {
+  }
+  else
+  {
     // Can't read temperature
     return real_result;
   }
@@ -100,13 +109,15 @@ float LM75A::getTemperatureInDegrees() const
   refactored_value >>= 5;
 
   float real_value;
-  if (refactored_value & 0x0400) {
+  if (refactored_value & 0x0400)
+  {
     // When sign bit is set, set upper unused bits, then 2's complement
     refactored_value |= 0xf800;
     refactored_value = ~refactored_value + 1;
     real_value = (float)refactored_value * (-1) * LM75A_DEGREES_RESOLUTION;
   }
-  else {
+  else
+  {
     real_value = (float)refactored_value *  LM75A_DEGREES_RESOLUTION;
   }
 
