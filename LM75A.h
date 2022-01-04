@@ -17,6 +17,11 @@
 #include "WProgram.h"
 #endif
 
+#include <Wire.h>
+
+// TODO: Uncomment this line if you want to use TwoWire
+// #define USE_TWO_WIRE_FOR_LM75A 1
+
 #define INVALID_LM75A_TEMPERATURE 1000
 
 class LM75A
@@ -24,11 +29,20 @@ class LM75A
   public:
     /*!
      * \brief LM75A Initialize I2C LM75A Temperature sensor instance
+     * \param specific_wire (TwoWire*, needed ONLY if USE_TWO_WIRE_FOR_LM75A is defined BEFORE include of this header)
+     *                      This wire will be used instead of default board "Wire". It must be initialized with "TwoWire::begin"
      * \param A0_value (bool) A0 Pin value (used for address)
      * \param A1_value (bool) A1 Pin value (used for address)
      * \param A2_value (bool) A2 Pin value (used for address)
      */
-    LM75A(bool A0_value = false, bool A1_value = false, bool A2_value = false);
+    LM75A(
+          #ifdef USE_TWO_WIRE_FOR_LM75A
+          TwoWire* specific_wire,
+          #endif
+          bool A0_value = false,
+          bool A1_value = false,
+          bool A2_value = false
+          );
 
     /*!
      * \brief getTemperatureInDegrees Get temperature from LM75A sensor in degrees
@@ -54,6 +68,9 @@ class LM75A
 
   private:
     int _i2c_device_address;
+    #ifdef USE_TWO_WIRE_FOR_LM75A
+    TwoWire* _specific_wire;
+    #endif
 };
 
 #endif //LM75A_h
