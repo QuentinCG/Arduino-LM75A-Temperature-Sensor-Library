@@ -2,10 +2,10 @@
  * \brief I2C LM75A temperature sensor library (implementation)
  *
  * \author Quentin Comte-Gaz <quentin@comte-gaz.com>
- * \date 27 December 2021
+ * \date 05 January 2022
  * \license MIT License (contact me if too restrictive)
- * \copyright Copyright (c) 2021 Quentin Comte-Gaz
- * \version 1.1
+ * \copyright Copyright (c) 2022 Quentin Comte-Gaz
+ * \version 1.2
  */
 
 #include "LM75A.h"
@@ -27,7 +27,13 @@ const int LM75A_REG_ADDR_TEMP = 0;
 
 using namespace LM75AConstValues;
 
-LM75A::LM75A(bool A0_value, bool A1_value, bool A2_value)
+LM75A::LM75A(
+  #ifdef USE_TWO_WIRE_FOR_LM75A
+  TwoWire* specific_wire,
+  #endif
+  bool A0_value,
+  bool A1_value,
+  bool A2_value)
 {
   _i2c_device_address = LM75A_BASE_ADDRESS;
 
@@ -47,7 +53,12 @@ LM75A::LM75A(bool A0_value, bool A1_value, bool A2_value)
     _i2c_device_address += 4;
   }
 
+  // Select Wire (if one I2C range) or TwoWire (if two I2C range)
+  #ifdef USE_TWO_WIRE_FOR_LM75A
+  _specific_wire = specific_wire;
+  #else
   Wire.begin();
+  #endif
 }
 
 float LM75A::fahrenheitToDegrees(float temperature_in_fahrenheit)
@@ -78,6 +89,26 @@ float LM75A::getTemperatureInDegrees() const
   uint16_t i2c_received = 0;
 
   // Go to temperature data register
+  #ifdef USE_TWO_WIRE_FOR_LM75A
+  _specific_wire->beginTransmission(_i2c_device_address);
+  _specific_wire->write(LM75A_REG_ADDR_TEMP);
+  if (_specific_wire->endTransmission())
+  {
+    // Transmission error
+    return real_result;
+  }
+
+  // Get content
+  if (_specific_wire->requestFrom(_i2c_device_address, 2))
+  {
+    _specific_wire->readBytes((uint8_t*)&i2c_received, 2);
+  }
+  else
+  {
+    // Can't read temperature
+    return real_result;
+  }
+  #else
   Wire.beginTransmission(_i2c_device_address);
   Wire.write(LM75A_REG_ADDR_TEMP);
   if (Wire.endTransmission())
@@ -96,6 +127,7 @@ float LM75A::getTemperatureInDegrees() const
     // Can't read temperature
     return real_result;
   }
+  #endif
 
   // Modify the value (only 11 MSB are relevant if swapped)
   int16_t refactored_value;

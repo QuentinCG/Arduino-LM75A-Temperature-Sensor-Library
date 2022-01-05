@@ -2,18 +2,18 @@
  * \brief Show temperature in degrees and fahrenheit every second
  *
  * \author Quentin Comte-Gaz <quentin@comte-gaz.com>
- * \date 27 December 2021
+ * \date 05 January 2022
  * \license MIT License (contact me if too restrictive)
- * \copyright Copyright (c) 2021 Quentin Comte-Gaz
- * \version 1.0
+ * \copyright Copyright (c) 2022 Quentin Comte-Gaz
+ * \version 1.2
  */
 
 #include <LM75A.h>
 
 // Create I2C LM75A instance
-LM75A lm75a_sensor(false,  //A0 LM75A pin state
-                   false,  //A1 LM75A pin state
-                   false); //A2 LM75A pin state
+LM75A lm75a_sensor(false,  // A0 LM75A pin state (connected to ground = false)
+                   false,  // A1 LM75A pin state (connected to ground = false)
+                   false); // A2 LM75A pin state (connected to ground = false)
 // Equivalent to "LM75A lm75a_sensor;"
 
 void setup(void)
