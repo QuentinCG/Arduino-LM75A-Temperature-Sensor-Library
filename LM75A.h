@@ -1,11 +1,16 @@
 /*
  * \brief I2C LM75A temperature sensor library
  *
+ * This library can :
+ *   - Show a LM75A sensor temperature in Degrees and Fahrenheit
+ *   - Use multiple LM75A sensors on the same I2C network (by changing A0/A1/A2 LM75A pin state)
+ *   - Use multiple LM75A sensors on default I2C board or using multi-I2C board logic (TwoWire) if available (this doubles the number of usable LM75A on compatible boards)
+ *
  * \author Quentin Comte-Gaz <quentin@comte-gaz.com>
- * \date 8 July 2016 & 14 January 2018
+ * \date 05 January 2022
  * \license MIT License (contact me if too restrictive)
- * \copyright Copyright (c) 2016 Quentin Comte-Gaz
- * \version 1.1
+ * \copyright Copyright (c) 2022 Quentin Comte-Gaz
+ * \version 1.2
  */
 
 #ifndef LM75A_h
@@ -31,9 +36,9 @@ class LM75A
      * \brief LM75A Initialize I2C LM75A Temperature sensor instance
      * \param specific_wire (TwoWire*, needed ONLY if USE_TWO_WIRE_FOR_LM75A is defined BEFORE include of this header)
      *                      This wire will be used instead of default board "Wire". It must be initialized with "TwoWire::begin"
-     * \param A0_value (bool) A0 Pin value (used for address)
-     * \param A1_value (bool) A1 Pin value (used for address)
-     * \param A2_value (bool) A2 Pin value (used for address)
+     * \param A0_value (bool) A0 Pin value (connected to ground = false, this will be used for I2C address)
+     * \param A1_value (bool) A1 Pin value (connected to ground = false, this will be used for I2C address)
+     * \param A2_value (bool) A2 Pin value (connected to ground = false, this will be used for I2C address)
      */
     LM75A(
           #ifdef USE_TWO_WIRE_FOR_LM75A
