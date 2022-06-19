@@ -2,10 +2,10 @@
  * \brief I2C LM75A temperature sensor library (implementation)
  *
  * \author Quentin Comte-Gaz <quentin@comte-gaz.com>
- * \date 05 January 2022
+ * \date 19 June 2022
  * \license MIT License (contact me if too restrictive)
  * \copyright Copyright (c) 2022 Quentin Comte-Gaz
- * \version 1.2
+ * \version 1.3
  */
 
 #include "LM75A.h"
@@ -52,6 +52,22 @@ LM75A::LM75A(
   {
     _i2c_device_address += 4;
   }
+
+  // Select Wire (if one I2C range) or TwoWire (if two I2C range)
+  #ifdef USE_TWO_WIRE_FOR_LM75A
+  _specific_wire = specific_wire;
+  #else
+  Wire.begin();
+  #endif
+}
+
+LM75A::LM75A(
+  #ifdef USE_TWO_WIRE_FOR_LM75A
+  TwoWire* specific_wire,
+  #endif
+  int address)
+{
+  _i2c_device_address = address;
 
   // Select Wire (if one I2C range) or TwoWire (if two I2C range)
   #ifdef USE_TWO_WIRE_FOR_LM75A

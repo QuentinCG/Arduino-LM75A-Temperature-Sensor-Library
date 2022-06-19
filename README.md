@@ -62,3 +62,4 @@ If you want to add more examples or improve the library, just create a pull requ
 
 - Thank you <a target="_blank" href="https://github.com/andrzejboro">andrzejboro</a> for your help on a bug for negative temperature.
 - Thank you <a target="_blank" href="https://github.com/damianjwilliams">damianjwilliams</a> for your idea and help on multi I2C handling.
+- Thank you <a target="_blank" href="https://github.com/BirdAPI">BirdAPI</a> for your idea to add a raw contructor using directly the I2C address.
