@@ -50,6 +50,10 @@ Three examples are provided with this library:
 
 <a target="_blank" href="https://github.com/QuentinCG/Arduino-LM75A-Temperature-Sensor-Library/blob/master/examples/LM75A_MultiI2cWire/LM75A_MultiI2cWire.ino">Link to source code</a>
 
+## Interesting forks
+
+- <a target="_blank" href="https://github.com/Stov1k/ESPHome-LM75A-Temperature-Sensor-Component">Fork of this Arduino library but adapted to ESPHome module.</a>
+
 ## License
 
 This project is under MIT license. This means you can use it as you want (just don't delete the library header).
